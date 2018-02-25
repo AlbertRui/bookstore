@@ -2,7 +2,11 @@ package me.bookstore.dao.impl;
 
 import me.bookstore.dao.Dao;
 import me.bookstore.db.JDBCUtils;
+import me.bookstore.utils.ReflectionUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +21,12 @@ import java.util.List;
 public class BaseDao<T> implements Dao<T> {
 
     private QueryRunner queryRunner = new QueryRunner();
+
+    private Class<T> clazz;
+
+    public BaseDao() {
+        clazz = ReflectionUtils.getSuperGenericType(getClass());
+    }
 
     /**
      * 执行 INSERT 操作, 返回插入后的记录的 ID
@@ -44,6 +54,9 @@ public class BaseDao<T> implements Dao<T> {
                 }
             }
 
+            //执行插入操作
+            preparedStatement.executeUpdate();
+
             //获取生成的主键值
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -68,7 +81,8 @@ public class BaseDao<T> implements Dao<T> {
         Connection connection = null;
 
         try {
-
+            connection = JDBCUtils.getConnection();
+            queryRunner.update(connection, sql, args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -88,7 +102,8 @@ public class BaseDao<T> implements Dao<T> {
         Connection connection = null;
 
         try {
-
+            connection = JDBCUtils.getConnection();
+            return queryRunner.query(connection, sql, new BeanHandler<>(clazz), args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -109,7 +124,8 @@ public class BaseDao<T> implements Dao<T> {
         Connection connection = null;
 
         try {
-
+            connection = JDBCUtils.getConnection();
+            return queryRunner.query(connection, sql, new BeanListHandler<>(clazz), args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -125,12 +141,14 @@ public class BaseDao<T> implements Dao<T> {
      * @param args : 填充占位符的可变参数
      * @return 执行一个属性或值的查询操作, 例如查询某一条记录的一个字段, 或查询某个统计信息, 返回要查询的值
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <V> V getSingleVal(String sql, Object... args) {
         Connection connection = null;
 
         try {
-
+            connection = JDBCUtils.getConnection();
+            return (V) queryRunner.query(connection, sql, new ScalarHandler(), args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -150,7 +168,8 @@ public class BaseDao<T> implements Dao<T> {
         Connection connection = null;
 
         try {
-
+            connection = JDBCUtils.getConnection();
+            queryRunner.batch(connection, sql, args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
