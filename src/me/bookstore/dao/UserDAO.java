@@ -1,15 +1,17 @@
 package me.bookstore.dao;
 
-import com.atguigu.bookstore.domain.User;
+import me.bookstore.domain.User;
 
+@SuppressWarnings("JavaDoc")
 public interface UserDAO {
 
-	/**
-	 * �����û�����ȡ User ����
-	 * @param username
-	 * @return
-	 */
-	public abstract User getUser(String username);
+    /**
+     * 根据用户名获取 User 对象
+     *
+     * @param username
+     * @return
+     */
+    public abstract User getUser(String username);
 
 }
 

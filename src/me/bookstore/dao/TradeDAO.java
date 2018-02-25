@@ -1,22 +1,25 @@
 package me.bookstore.dao;
 
+import me.bookstore.domain.Trade;
+
 import java.util.Set;
 
-import com.atguigu.bookstore.domain.Trade;
-
+@SuppressWarnings("JavaDoc")
 public interface TradeDAO {
 
-	/**
-	 * �����ݱ��в��� Trade ����
-	 * @param trade
-	 */
-	public abstract void insert(Trade trade);
+    /**
+     * 向数据表中插入 Trade 对象
+     *
+     * @param trade
+     */
+    public abstract void insert(Trade trade);
 
-	/**
-	 * ���� userId ��ȡ��������� Trade �ļ���
-	 * @param userId
-	 * @return
-	 */
-	public abstract Set<Trade> getTradesWithUserId(Integer userId);
+    /**
+     * 根据 userId 获取和其关联的 Trade 的集合
+     *
+     * @param userId
+     * @return
+     */
+    public abstract Set<Trade> getTradesWithUserId(Integer userId);
 
 }

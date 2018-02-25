@@ -1,24 +1,27 @@
 package me.bookstore.dao;
 
+import me.bookstore.domain.TradeItem;
+
 import java.util.Collection;
 import java.util.Set;
 
-import com.atguigu.bookstore.domain.TradeItem;
-
+@SuppressWarnings("JavaDoc")
 public interface TradeItemDAO {
 
-	/**
-	 * �������� TradeItem ����
-	 * @param items
-	 */
-	public abstract void batchSave(Collection<TradeItem> items);
+    /**
+     * 批量保存 TradeItem 对象
+     *
+     * @param items
+     */
+    public abstract void batchSave(Collection<TradeItem> items);
 
-	/**
-	 * ���� tradeId ��ȡ��������� TradeItem �ļ���
-	 * @param tradeId
-	 * @return
-	 */
-	public abstract Set<TradeItem> getTradeItemsWithTradeId(Integer tradeId);
+    /**
+     * 根据 tradeId 获取和其关联的 TradeItem 的集合
+     *
+     * @param tradeId
+     * @return
+     */
+    public abstract Set<TradeItem> getTradeItemsWithTradeId(Integer tradeId);
 
 }
 
