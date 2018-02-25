@@ -6,54 +6,54 @@ import java.util.Set;
 
 public class Trade {
 
-	//Trade �����Ӧ�� id
-	private Integer tradeId;
-	
-	//���׵�ʱ��
-	private Date tradeTime;
+    //Trade 对象对应的 id
+    private Integer tradeId;
 
-	//Trade �����Ķ�� TradeItem
-	private Set<TradeItem> items = new LinkedHashSet<TradeItem>();
-	
-	public void setItems(Set<TradeItem> items) {
-		this.items = items;
-	}
-	
-	public Set<TradeItem> getItems() {
-		return items;
-	}
+    //交易的时间
+    private Date tradeTime;
 
-	//�� Trade ������ User �� userId
-	private Integer userId;
-	
-	public Integer getTradeId() {
-		return tradeId;
-	}
+    //Trade 关联的多个 TradeItem
+    private Set<TradeItem> items = new LinkedHashSet<TradeItem>();
 
-	public void setTradeId(Integer tradeId) {
-		this.tradeId = tradeId;
-	}
+    public void setItems(Set<TradeItem> items) {
+        this.items = items;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Set<TradeItem> getItems() {
+        return items;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    //和 Trade 关联的 User 的 userId
+    private Integer userId;
 
-	public Date getTradeTime() {
-		return tradeTime;
-	}
+    public Integer getTradeId() {
+        return tradeId;
+    }
 
-	public void setTradeTime(Date tradeTime) {
-		this.tradeTime = tradeTime;
-	}
+    public void setTradeId(Integer tradeId) {
+        this.tradeId = tradeId;
+    }
 
-	@Override
-	public String toString() {
-		return "Trade [tradeId=" + tradeId + ", tradeTime=" + tradeTime
-				+ ", userId=" + userId + "]";
-	}
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Date getTradeTime() {
+        return tradeTime;
+    }
+
+    public void setTradeTime(Date tradeTime) {
+        this.tradeTime = tradeTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Trade [tradeId=" + tradeId + ", tradeTime=" + tradeTime
+                + ", userId=" + userId + "]";
+    }
 }
 

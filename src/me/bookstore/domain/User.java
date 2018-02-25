@@ -5,58 +5,58 @@ import java.util.Set;
 
 public class User {
 
-	private Integer userId;
-	private String username;
-	private int accountId;
-	 
-	private Set<Trade> trades = new LinkedHashSet<Trade>();
+    private Integer userId;
+    private String username;
+    private int accountId;
 
-	public void setTrades(Set<Trade> trades) {
-		this.trades = trades;
-	}
-	
-	public Set<Trade> getTrades() {
-		return trades;
-	}
-	
-	public Integer getUserId() {
-		return userId;
-	}
+    private Set<Trade> trades = new LinkedHashSet<>();
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setTrades(Set<Trade> trades) {
+        this.trades = trades;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public Set<Trade> getTrades() {
+        return trades;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public Integer getAccountId() {
-		return accountId;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username
-				+ ", accountId=" + accountId + "]";
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public User(Integer userId, String username, int accountId) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.accountId = accountId;
-	}
+    public Integer getAccountId() {
+        return accountId;
+    }
 
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", username=" + username
+                + ", accountId=" + accountId + "]";
+    }
+
+    public User(Integer userId, String username, int accountId) {
+        super();
+        this.userId = userId;
+        this.username = username;
+        this.accountId = accountId;
+    }
+
+    public User() {
+
+    }
 }

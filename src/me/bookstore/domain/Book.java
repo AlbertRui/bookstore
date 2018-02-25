@@ -88,5 +88,4 @@ public class Book {
                 + storeNumber + ", remark=" + remark + "]\n\n";
     }
 
-
 }
