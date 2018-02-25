@@ -69,4 +69,27 @@ public class JDBCUtils {
         }
     }
 
+    /**
+     * 关闭连接
+     * @param resultSet
+     * @param statement
+     * @param connection
+     */
+    public static void release(ResultSet resultSet, Statement statement, Connection connection) {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DBException("数据库连接错误！！！");
+        }
+    }
+
 }
