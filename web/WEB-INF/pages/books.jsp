@@ -45,12 +45,13 @@
 </head>
 <body>
 <div style="text-align: center;">
+    <h1>欢迎来到网上书城</h1><br>
     <c:if test="${!empty param.title}">
         您已经将 ${param.title} 放入到购物车中
         <br><br>
     </c:if>
-    <c:if test="${!empty sessionScope.ShoppingCart}">
-        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<<a href="${pageContext.request.contextPath}/bookServlet?method=toCartPage&pageNo=${requestScope.page.pageNo}">查看购物车</a>
+    <c:if test="${!empty sessionScope.ShoppingCart.books}">
+        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<a href="${pageContext.request.contextPath}/bookServlet?method=toCartPage&pageNo=${requestScope.page.pageNo}">查看购物车</a>
         <br><br>
     </c:if>
     <form action="bookServlet?method=getBooks" method="post">
@@ -64,8 +65,6 @@
 
         <input type="submit" value="submit"/>
     </form>
-    <br><br>
-
     <table cellpadding="10" align="center">
         <c:forEach items="${requestScope.page.list}" var="book">
             <tr>
@@ -78,8 +77,7 @@
             </tr>
         </c:forEach>
     </table>
-
-    <br><br>
+    <br>
 
     共 ${requestScope.page.totalPageNumber} 页
     &nbsp;&nbsp;

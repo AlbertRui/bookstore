@@ -40,4 +40,8 @@ public class BookService {
     public void clearShoppingCart(ShoppingCart shoppingCart) {
         shoppingCart.clear();
     }
+
+    public void updateItemQuantity(int id, int quantity, ShoppingCart shoppingCart) {
+        shoppingCart.updateItemQuantity(id, quantity);
+    }
 }

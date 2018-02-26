@@ -1,5 +1,6 @@
 package me.bookstore.servlet;
 
+import com.google.gson.Gson;
 import me.bookstore.domain.Book;
 import me.bookstore.domain.ShoppingCart;
 import me.bookstore.service.BookService;
@@ -13,10 +14,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookServlet extends HttpServlet {
 
     private BookService bookService = new BookService();
+
+    protected void updateItemQuantity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //4. 在 updateItemQuantity 方法中, 获取 quanity, id, 再获取购物车对象, 调用 service 的方法做修改
+        String idStr = request.getParameter("id");
+        String quantityStr = request.getParameter("quantity");
+
+        int id = -1;
+        int quantity = -1;
+        try {
+            id = Integer.parseInt(idStr);
+            quantity = Integer.parseInt(quantityStr);
+        } catch (Exception ignore) {
+        }
+
+        ShoppingCart shoppingCart = BookStoreWebUtils.getShoppingCart(request);
+        if (id > 0 && quantity > 0) {
+            bookService.updateItemQuantity(id, quantity, shoppingCart);
+        }
+
+        //5. 传回 JSON 数据: bookNumber:xx, totalMoney
+        Map<String, Object> result = new HashMap<>();
+        result.put("bookNumber", shoppingCart.getBookNumber());
+        result.put("totalMoney", shoppingCart.getTotalMoney());
+
+        Gson gson = new Gson();
+        String gsonStr = gson.toJson(result);
+        response.setContentType("text/javascript");
+        response.getWriter().print(gsonStr);
+    }
 
     protected void clear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShoppingCart shoppingCart = BookStoreWebUtils.getShoppingCart(request);
@@ -31,10 +63,16 @@ public class BookServlet extends HttpServlet {
         int id = -1;
         try {
             id = Integer.parseInt(idStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
 
         ShoppingCart shoppingCart = BookStoreWebUtils.getShoppingCart(request);
         bookService.removeItemFromShoppingCart(id, shoppingCart);
+
+        if (shoppingCart.isEmpty()) {
+            request.getRequestDispatcher("/WEB-INF/pages/emptyCart.jsp").forward(request, response);
+            return;
+        }
 
         request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
     }
@@ -51,7 +89,8 @@ public class BookServlet extends HttpServlet {
 
         try {
             id = Integer.parseInt(idStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
 
         if (id > 0) {
             //2.获取购物车对象
@@ -78,7 +117,8 @@ public class BookServlet extends HttpServlet {
 
         try {
             id = Integer.parseInt(idStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
 
         if (id > 0) {
             book = bookService.getBook(id);
