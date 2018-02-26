@@ -25,7 +25,7 @@
                 if (reg.test(val)) {
                     //2. 校验 val 在一个合法的范围内： 1-totalPageNumber
                     pageNo = parseInt(val);
-                    if (pageNo >= 1 && pageNo <= parseInt("${requestScope.page.totalPageNumber }")) {
+                    if (pageNo >= 1 && pageNo <= parseInt("${requestScope.page.totalPageNumber}")) {
                         flag = true;
                     }
                 }
@@ -45,7 +45,14 @@
 </head>
 <body>
 <div style="text-align: center;">
-    <br><br>
+    <c:if test="${!empty param.title}">
+        您已经将 ${param.title} 放入到购物车中
+        <br><br>
+    </c:if>
+    <c:if test="${!empty sessionScope.ShoppingCart}">
+        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<<a href="${pageContext.request.contextPath}/bookServlet?method=toCartPage&pageNo=${requestScope.page.pageNo}">查看购物车</a>
+        <br><br>
+    </c:if>
     <form action="bookServlet?method=getBooks" method="post">
         price:
         <label>
@@ -63,11 +70,11 @@
         <c:forEach items="${requestScope.page.list}" var="book">
             <tr>
                 <td>
-                    <a href="bookServlet?method=getBook&pageNo=${requestScope.page.pageNo }&id=${book.id}">${book.title}</a><br>
+                    <a href="bookServlet?method=getBook&pageNo=${requestScope.page.pageNo}&id=${book.id}">${book.title}</a><br>
                         ${book.author}
                 </td>
                 <td>${book.price}</td>
-                <td><a href="">加入购物车</a></td>
+                <td><a href="bookServlet?method=addToCart&pageNo=${requestScope.page.pageNo}&id=${book.id}&title=${book.title}">加入购物车</a></td>
             </tr>
         </c:forEach>
     </table>

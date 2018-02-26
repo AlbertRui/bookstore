@@ -7,6 +7,7 @@ package me.bookstore.domain;
 public class ShoppingCartItem {
 
     private Book book;
+    //商品数量
     private int quantity;
 
     public ShoppingCartItem(Book book) {
