@@ -16,6 +16,29 @@ public class BookServlet extends HttpServlet {
 
     private BookService bookService = new BookService();
 
+    protected void getBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idStr = request.getParameter("id");
+
+        int id = -1;
+        Book book = null;
+
+        try {
+            id = Integer.parseInt(idStr);
+        } catch (NumberFormatException ignore) {}
+
+        if (id > 0) {
+            book = bookService.getBook(id);
+        }
+
+        if (book == null) {
+            response.sendRedirect(request.getContextPath() + "/jsp/error-1.jsp");
+            return;
+        }
+
+        request.setAttribute("book", book);
+        request.getRequestDispatcher("/WEB-INF/pages/book.jsp").forward(request, response);
+    }
+
     protected void getBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pageNoStr = request.getParameter("pageNo");
         String maxPriceStr = request.getParameter("maxPrice");
@@ -27,13 +50,16 @@ public class BookServlet extends HttpServlet {
 
         try {
             pageNo = Integer.parseInt(pageNoStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
         try {
             minPrice = Integer.parseInt(minPriceStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
         try {
             maxPrice = Integer.parseInt(maxPriceStr);
-        } catch (NumberFormatException ignore) {}
+        } catch (NumberFormatException ignore) {
+        }
 
         CriteriaBook criteriaBook = new CriteriaBook(minPrice, maxPrice, pageNo);
 

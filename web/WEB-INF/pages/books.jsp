@@ -13,12 +13,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("a").click(function () {
-                var serializeVal = $(":hidden").serialize();
-                window.location.href = this.href + "&" + serializeVal;
-                return false;
-            });
-
             $("#pageNo").change(function () {
                 var val = $(this).val();
                 val = $.trim(val);
@@ -37,7 +31,7 @@
                 }
 
                 if (!flag) {
-                    alert("输入的不是合法的页码.");
+                    alert("您输入的页码不合法.");
                     $(this).val("");
                     return;
                 }
@@ -47,10 +41,9 @@
             });
         });
     </script>
+    <%@include file="/jsp/queryCondition.jsp" %>
 </head>
 <body>
-<input type="hidden" name="minPrice" value="${param.minPrice}"/>
-<input type="hidden" name="maxPrice" value="${param.maxPrice}"/>
 <div style="text-align: center;">
     <br><br>
     <form action="bookServlet?method=getBooks" method="post">
@@ -70,7 +63,7 @@
         <c:forEach items="${requestScope.page.list}" var="book">
             <tr>
                 <td>
-                    <a href="">${book.title}</a><br>
+                    <a href="bookServlet?method=getBook&pageNo=${requestScope.page.pageNo }&id=${book.id}">${book.title}</a><br>
                         ${book.author}
                 </td>
                 <td>${book.price}</td>
