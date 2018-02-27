@@ -12,7 +12,7 @@ import org.junit.Test;
  * @version 1.0
  * @since <pre>February 27, 2018</pre>
  */
-public class AccountDaoImplTest {
+public class AccountDaoTest {
 
     private AccountDAO accountDAO = new AccountDaoImpl();
 
