@@ -20,7 +20,8 @@ public class TradeDaoImpl extends BaseDao<Trade> implements TradeDAO {
     @Override
     public void insert(Trade trade) {
         String sql = "INSERT INTO trade(userid, tradetime) VALUES(?, ?)";
-        insert(sql, trade.getUserId(), trade.getTradeTime());
+        long tradeId = insert(sql, trade.getUserId(), trade.getTradeTime());
+        trade.setTradeId((int) tradeId);
     }
 
     /**
