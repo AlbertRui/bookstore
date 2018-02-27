@@ -8,10 +8,12 @@
 <%@page contentType="text/html;charset=UTF-8" %>
 <script type="text/javascript">
     $(function () {
-        $("a").click(function () {
-            var serializeVal = $(":hidden").serialize();
-            window.location.href = this.href + "&" + serializeVal;
-            return false;
+        $("a").each(function () {
+            this.onclick = function () {
+                var serializeVal = $(":hidden").serialize();
+                window.location.href = this.href + "&" + serializeVal;
+                return false;
+            };
         });
     });
 </script>

@@ -44,4 +44,7 @@ public class BookService {
     public void updateItemQuantity(int id, int quantity, ShoppingCart shoppingCart) {
         shoppingCart.updateItemQuantity(id, quantity);
     }
+
+    public void cash(ShoppingCart shoppingCart, String username, String accountId) {
+    }
 }

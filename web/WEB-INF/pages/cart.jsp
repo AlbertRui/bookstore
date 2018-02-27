@@ -48,7 +48,7 @@
                 var $tr = $(this).parent().parent();
                 var title = $.trim($tr.find("td:first").text());
 
-                if (quantity == 0) {
+                if (quantity === 0) {
                     var flag2 = confirm("确定要删除" + title + "吗?");
                     if (flag2) {
                         //得到了 a 节点
@@ -107,7 +107,8 @@
                 <td>${item.book.title}</td>
                 <td>${item.book.price}</td>
                 <td>
-                    <input type="text" size="1" name="${item.book.id}" value="${item.quantity}" title="quantity"/>
+                    <input class="${item.quantity}" type="text" size="1" name="${item.book.id}" value="${item.quantity}"
+                           title="quantity"/>
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/bookServlet?method=remove&pageNo=${param.pageNo}&id=${item.book.id}"
@@ -122,7 +123,7 @@
             <td colspan="4">
                 <a href="${pageContext.request.contextPath}/bookServlet?method=getBooks&pageNo=${param.pageNo}">继续购物</a>&nbsp;&nbsp;
                 <a href="${pageContext.request.contextPath}/bookServlet?method=clear">清空购物车</a>&nbsp;&nbsp;
-                <a href="">结账</a>&nbsp;&nbsp;
+                <a href="${pageContext.request.contextPath}/bookServlet?method=forwardPage&page=cash">结账</a>&nbsp;&nbsp;
             </td>
         </tr>
     </table>

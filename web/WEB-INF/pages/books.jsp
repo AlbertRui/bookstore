@@ -51,7 +51,7 @@
         <br><br>
     </c:if>
     <c:if test="${!empty sessionScope.ShoppingCart.books}">
-        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<a href="${pageContext.request.contextPath}/bookServlet?method=toCartPage&pageNo=${requestScope.page.pageNo}">查看购物车</a>
+        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<a href="${pageContext.request.contextPath}/bookServlet?method=forwardPage&page=cart&pageNo=${requestScope.page.pageNo}">查看购物车</a>
         <br><br>
     </c:if>
     <form action="bookServlet?method=getBooks" method="post">
