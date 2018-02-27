@@ -3,10 +3,13 @@ package me.bookstore.test;
 import me.bookstore.dao.BookDAO;
 import me.bookstore.dao.impl.BookDaoImpl;
 import me.bookstore.domain.Book;
+import me.bookstore.domain.ShoppingCartItem;
 import me.bookstore.web.CriteriaBook;
 import me.bookstore.web.Page;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +26,7 @@ public class BookDaoTest {
      * Method: getBook(int id)
      */
     @Test
-    public void testGetBook() throws Exception {
+    public void testGetBook() {
         Book book = bookDAO.getBook(5);
         System.out.println(book);
     }
@@ -68,7 +71,7 @@ public class BookDaoTest {
      * Method: getStoreNumber(Integer id)
      */
     @Test
-    public void testGetStoreNumber() throws Exception {
+    public void testGetStoreNumber() {
         int store = bookDAO.getStoreNumber(5);
         System.out.println(store);
     }
@@ -77,9 +80,30 @@ public class BookDaoTest {
      * Method: batchUpdateStoreNumberAndSalesAmount(Collection<ShoppingCartItem> items)
      */
     @Test
-    public void testBatchUpdateStoreNumberAndSalesAmount() throws Exception {
-//TODO: Test goes here... 
-    }
+    public void testBatchUpdateStoreNumberAndSalesAmount() {
+        Collection<ShoppingCartItem> items = new ArrayList<>();
 
+        Book book = bookDAO.getBook(1);
+        ShoppingCartItem sci = new ShoppingCartItem(book);
+        sci.setQuantity(10);
+        items.add(sci);
+
+        book = bookDAO.getBook(2);
+        sci = new ShoppingCartItem(book);
+        sci.setQuantity(11);
+        items.add(sci);
+
+        book = bookDAO.getBook(3);
+        sci = new ShoppingCartItem(book);
+        sci.setQuantity(12);
+        items.add(sci);
+
+        book = bookDAO.getBook(4);
+        sci = new ShoppingCartItem(book);
+        sci.setQuantity(14);
+        items.add(sci);
+
+        bookDAO.batchUpdateStoreNumberAndSalesAmount(items);
+    }
 
 } 

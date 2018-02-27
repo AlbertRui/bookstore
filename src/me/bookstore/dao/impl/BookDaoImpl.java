@@ -2,10 +2,12 @@ package me.bookstore.dao.impl;
 
 import me.bookstore.dao.BookDAO;
 import me.bookstore.domain.Book;
+import me.bookstore.domain.ShoppingCart;
 import me.bookstore.domain.ShoppingCartItem;
 import me.bookstore.web.CriteriaBook;
 import me.bookstore.web.Page;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -93,6 +95,15 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDAO {
      */
     @Override
     public void batchUpdateStoreNumberAndSalesAmount(Collection<ShoppingCartItem> items) {
+        String sql = "UPDATE mybooks SET salesAmount = salesAmount + ?, storeNumber = storeNumber - ? WHERE id = ?";
+        Object[][] args = new Object[items.size()][3];
+        List<ShoppingCartItem> itemList = new ArrayList<>(items);
 
+        for (int i = 0; i < items.size(); i++) {
+            args[i][0] = itemList.get(i).getQuantity();
+            args[i][1] = itemList.get(i).getQuantity();
+            args[i][2] = itemList.get(i).getBook().getId();
+        }
+        batch(sql, args);
     }
 }
