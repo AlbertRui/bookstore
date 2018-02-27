@@ -12,7 +12,7 @@ import java.sql.Statement;
 /**
  * JDBC 的工具类
  */
-@SuppressWarnings("JavaDoc")
+@SuppressWarnings("ALL")
 public class JDBCUtils {
 
     private static DataSource dataSource;

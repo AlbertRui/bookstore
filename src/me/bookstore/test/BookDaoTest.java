@@ -2,12 +2,15 @@ package me.bookstore.test;
 
 import me.bookstore.dao.BookDAO;
 import me.bookstore.dao.impl.BookDaoImpl;
+import me.bookstore.db.JDBCUtils;
 import me.bookstore.domain.Book;
 import me.bookstore.domain.ShoppingCartItem;
+import me.bookstore.web.ConnectionContext;
 import me.bookstore.web.CriteriaBook;
 import me.bookstore.web.Page;
 import org.junit.Test;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +30,8 @@ public class BookDaoTest {
      */
     @Test
     public void testGetBook() {
+        Connection connection = JDBCUtils.getConnection();
+        ConnectionContext.getInstance().bind(connection);
         Book book = bookDAO.getBook(5);
         System.out.println(book);
     }

@@ -1,6 +1,7 @@
 package me.bookstore.servlet;
 
 import com.google.gson.Gson;
+import com.sun.xml.internal.ws.api.pipe.ThrowableContainerPropertySet;
 import me.bookstore.domain.Account;
 import me.bookstore.domain.Book;
 import me.bookstore.domain.ShoppingCart;
@@ -307,6 +308,7 @@ public class BookServlet extends HttpServlet {
             method.invoke(this, request, response);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

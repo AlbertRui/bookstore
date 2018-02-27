@@ -10,7 +10,6 @@ import me.bookstore.dao.impl.BookDaoImpl;
 import me.bookstore.dao.impl.TradeDaoImpl;
 import me.bookstore.dao.impl.TradeItemDaoImpl;
 import me.bookstore.dao.impl.UserDaoImpl;
-import me.bookstore.domain.Account;
 import me.bookstore.domain.Book;
 import me.bookstore.domain.ShoppingCart;
 import me.bookstore.domain.ShoppingCartItem;
@@ -73,13 +72,16 @@ public class BookService {
     public void cash(ShoppingCart shoppingCart, String username, String accountId) {
         //1. 更新 mybooks 数据表相关记录的 salesamount 和 storenumber
         bookDAO.batchUpdateStoreNumberAndSalesAmount(shoppingCart.getItems());
+
         //2. 更新 account 数据表的 balance
         accountDAO.updateBalance(Integer.parseInt(accountId), shoppingCart.getTotalMoney());
+
         //3. 向 trade 数据表插入一条记录
         Trade trade = new Trade();
         trade.setTradeTime(new Date(new java.util.Date().getTime()));
         trade.setUserId(userDAO.getUser(username).getUserId());
         tradeDAO.insert(trade);
+
         //4. 向 tradeitem 数据表插入 n 条记录
         Collection<TradeItem> items = new ArrayList<>();
         for(ShoppingCartItem sci: shoppingCart.getItems()){
@@ -92,6 +94,7 @@ public class BookService {
             items.add(tradeItem);
         }
         tradeItemDAO.batchSave(items);
+
         //5. 清空购物车
         shoppingCart.clear();
     }
