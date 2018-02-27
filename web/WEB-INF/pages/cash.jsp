@@ -5,8 +5,8 @@
   Time: 10:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/jsp/common.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -14,15 +14,15 @@
 <body>
 <div style="text-align: center;">
     <br><br>
-    您一共买了 ${sessionScope.ShoppingCart.bookNumber } 本书
+    您一共买了 ${sessionScope.ShoppingCart.bookNumber} 本书
     <br>
-    应付: ￥${ sessionScope.ShoppingCart.totalMoney}
+    应付: ￥${sessionScope.ShoppingCart.totalMoney}
     <br><br>
     <c:if test="${!empty requestScope.errors}">
         <span style="color: red;">${requestScope.errors}</span>
     </c:if>
-    <form action="${pageContext.request.contextPath}/bookServlet?method=cash" method="post">
-        <table cellpadding="10">
+    <form action="bookServlet?method=cash" method="post">
+        <table cellpadding="10" align="center">
             <tr>
                 <td>姓名</td>
                 <td><input type="text" name="username" title="username"/></td>

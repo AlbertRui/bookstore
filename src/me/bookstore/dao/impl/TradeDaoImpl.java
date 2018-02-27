@@ -3,7 +3,7 @@ package me.bookstore.dao.impl;
 import me.bookstore.dao.TradeDAO;
 import me.bookstore.domain.Trade;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -32,7 +32,7 @@ public class TradeDaoImpl extends BaseDao<Trade> implements TradeDAO {
      */
     @Override
     public Set<Trade> getTradesWithUserId(Integer userId) {
-        String sql = "SELECT * FROM trade WHERE userid = ?";
-        return new HashSet<>(queryForList(sql, userId));
+        String sql = "SELECT * FROM trade WHERE userid = ? ORDER BY tradeTime DESC";
+        return new LinkedHashSet<>(queryForList(sql, userId));
     }
 }

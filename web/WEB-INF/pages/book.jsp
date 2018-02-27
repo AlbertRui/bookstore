@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/jsp/common.jsp" %>
 <jsp:useBean id="book" scope="request" type="me.bookstore.domain.Book"/>
 <html>
 <head>

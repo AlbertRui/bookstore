@@ -19,6 +19,7 @@ import java.util.List;
  * @author AlbertRui
  * @create 2018-02-25 22:24
  */
+@SuppressWarnings("ALL")
 public class BaseDao<T> implements Dao<T> {
 
     private QueryRunner queryRunner = new QueryRunner();

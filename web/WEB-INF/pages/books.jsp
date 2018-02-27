@@ -5,8 +5,8 @@
   Time: 11:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/jsp/common.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -51,7 +51,7 @@
         <br><br>
     </c:if>
     <c:if test="${!empty sessionScope.ShoppingCart.books}">
-        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<a href="${pageContext.request.contextPath}/bookServlet?method=forwardPage&page=cart&pageNo=${requestScope.page.pageNo}">查看购物车</a>
+        您的购物车中有 ${sessionScope.ShoppingCart.bookNumber} 本书，<a href="bookServlet?method=forwardPage&page=cart&pageNo=${requestScope.page.pageNo}">查看购物车</a>
         <br><br>
     </c:if>
     <form action="bookServlet?method=getBooks" method="post">
@@ -73,7 +73,9 @@
                         ${book.author}
                 </td>
                 <td>${book.price}</td>
-                <td><a href="bookServlet?method=addToCart&pageNo=${requestScope.page.pageNo}&id=${book.id}&title=${book.title}">加入购物车</a></td>
+                <td>
+                    <a href="bookServlet?method=addToCart&pageNo=${requestScope.page.pageNo}&id=${book.id}&title=${book.title}">加入购物车</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

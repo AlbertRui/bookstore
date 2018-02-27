@@ -120,7 +120,7 @@ public class BookServlet extends HttpServlet {
         boolean flag = true;
         User user = userService.getUserByUserName(username);
         if (user != null) {
-            if (accountId.trim().equals("" + user.getAccountId())) {
+            if (!accountId.trim().equals("" + user.getAccountId())) {
                 flag = false;
             }
         }

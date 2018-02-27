@@ -5,8 +5,8 @@
   Time: 18:51
   To change this template use File | Settings | File Templates.
 --%>
-<%@page contentType="text/html;charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/jsp/common.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -67,7 +67,7 @@
                     return;
                 }
                 //2. 请求地址为: bookServlet
-                var url = "${pageContext.request.contextPath}/bookServlet";
+                var url = "bookServlet";
 
                 //3. 请求参数为: method:updateItemQuantity, id:name属性值, quantity:val, time:new Date()
                 var idVal = $.trim(this.name);
@@ -111,7 +111,7 @@
                            title="quantity"/>
                 </td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/bookServlet?method=remove&pageNo=${param.pageNo}&id=${item.book.id}"
+                    <a href="bookServlet?method=remove&pageNo=${param.pageNo}&id=${item.book.id}"
                        class="delete">删除</a>
                 </td>
             </tr>
