@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
  *
  * @author Administrator
  */
-@SuppressWarnings("JavaDoc")
+@SuppressWarnings("ALL")
 public class ReflectionUtils {
 
 
@@ -25,7 +25,6 @@ public class ReflectionUtils {
      * @param index
      * @return
      */
-    @SuppressWarnings("unchecked")
     public static Class getSuperClassGenricType(Class clazz, int index) {
         Type genType = clazz.getGenericSuperclass();
 
